@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+#Autor: Erismar Oliveira
+#Instagram ErismarDev: https://www.instagram.com/erismardev
+#YouTube ErismarDev: https://www.youtube.com/erismardev
+#LinkedIn Erismar Oliveira: https://www.linkedin.com/in/erismar-oliveira/
+#Github Erismar Oliveira: https://github.com/erismaroliveira
+#Data de criação: 13/08/2024
+#Data de atualização: 13/08/2024
+#Versão: 0.1
+-->
+<!-- O conteúdo deste arquivo será carregado para cada aplicação web -->
+<Context antiResourceLocking="false" privileged="true" >
+
+    <!-- Conjunto padrão de recursos monitorados. Se uma dessas mudanças, o    -->
+    <!-- aplicativo da web será recarregado.                                   -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+
+    <!-- Remova o comentário para permitir a persistência da sessão nas reinicializações do Tomcat -->
+    <!--
+    <Manager pathname="SESSIONS.ser" />
+    -->
+  <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"
+    sameSiteCookies="strict" />
+  <!-- Configuração da Classe de Acesso remoto do Servidor Apache Tomcat -->
+  <!-- Na variável allow="" você adiciona as redes que serão permitidas o acesso
+      no Apache TomCAT Server e dos seus Webapps, caso você queira liberar todas
+	    as redes pode trocar os valores das sub-redes por: allow=".*"
+  -->
+  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+		allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1|10\.\d+\.\d+\.\d+|172\.\d+\.\d+\.\d+|192\.\d+\.\d+\.\d+" />
+  <Manager sessionAttributeValueClassNameFilter="java\.lang\.(?:Boolean|Integer|Long|Number|String)|org\.apache\.catalina\.filters\.CsrfPreventionFilter\$LruCache(?:\$1)?|java\.util\.(?:Linked)?HashMap"/>
+</Context>
